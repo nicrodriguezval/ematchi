@@ -1,12 +1,41 @@
-<script>
+<script lang="ts">
 	import Square from "./square.svelte";
 
-	const squares = Array(16).fill(0);
+	export let grid: string[];
+
+	let a = -1;
+	let b = -1;
+	let resetTimeout: number;
+
+	function onSelect(i: number) {
+		clearTimeout(resetTimeout);
+
+		if (a === -1 && b === -1) {
+			a = i;
+		} else if (b === -1) {
+			b = i;
+
+			if (grid[a] === grid[b]) {
+				// TODO
+			} else {
+				resetTimeout = setTimeout(() => {
+					a = b = -1;
+				}, 1000)
+			}
+		} else {
+			a = i;
+			b = -1;
+		}
+	}
 </script>
 
 <div class="grid">
-	{#each squares as _}
-		<Square />
+	{#each grid as emoji, i}
+		<Square
+			{emoji}
+			selected={a === i || b === i}
+			on:click={() => onSelect(i)}
+		/>
 	{/each}
 </div>
 
