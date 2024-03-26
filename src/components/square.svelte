@@ -13,9 +13,11 @@
 
 <style>
   .square {
+    position: relative;
     display: grid;
     place-content: center;
-    position: relative;
+    border-radius: 1em;
+    overflow: hidden;
 
     & > button {
       position: absolute;

@@ -3,6 +3,7 @@
   import { levels, type Level } from "$lib/levels";
   import { shuffle } from "$lib/utils";
 	import Found from "./found.svelte";
+	import Countdown from "./countdown.svelte";
 
   const level = levels[0];
 
@@ -35,7 +36,9 @@
 </script>
 
 <div class="game">
-	<div class="info"></div>
+	<div class="info">
+    <Countdown duration={level.duration} remaining={level.duration} />
+  </div>
 	<div class="grid-container">
     <Grid {grid} {found} on:found={onFound} />
   </div>
@@ -57,12 +60,10 @@
   .info {
     width: 80em;
     height: 10em;
-    background-color: #333;
   }
 
   .grid-container {
     width: 80em;
     height: 80em;
-    background-color: teal;
   }
 </style>
