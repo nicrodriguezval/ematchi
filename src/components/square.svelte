@@ -1,16 +1,18 @@
 <script lang="ts">
   export let emoji: string;
-  export let selected = false;
+  export let selected: boolean;
+  export let found: boolean;
 </script>
 
 <div class="square" class:flipped={selected}>
   <button on:click />
-  <span>{ emoji }</span>
+  {#if !found}
+    <span>{ emoji }</span>
+  {/if}
 </div>
 
 <style>
   .square {
-    background-color: yellow;
     display: grid;
     place-content: center;
     position: relative;
@@ -19,6 +21,7 @@
       position: absolute;
       inset: 0;
       z-index: 0;
+      border: none;
     }
     
     & > span {
