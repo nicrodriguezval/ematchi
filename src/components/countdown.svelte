@@ -70,7 +70,7 @@
 		& .duration {
 			flex: 1;
 			height: 1.2em;
-			background-color: var(--gray-color);
+				background-color: #777;
 			position: relative;
 			border-radius: 1em;
 			overflow: hidden;
@@ -79,7 +79,7 @@
 				position: absolute;
 				height: 100%;
 				width: calc(100% * var(--p));
-				background-color: #999;
+				background-color: var(--gray-color);
 			}
 		}
 	}

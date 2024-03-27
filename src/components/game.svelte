@@ -53,6 +53,7 @@
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
+    gap: 1em;
     height: 100vh;
     font-size: min(1vmin, 0.3rem);
 	}

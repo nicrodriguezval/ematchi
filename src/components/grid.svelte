@@ -39,6 +39,7 @@
 			{emoji}
 			selected={a === i || b === i}
 			found={found.includes(emoji)}
+			group={grid.indexOf(emoji) === i ? 'a' : 'b'}
 			on:click={() => onSelect(i)}
 		/>
 	{/each}
@@ -50,7 +51,7 @@
 		display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(4, 1fr);
-		gap: 0.75em;
+		gap: 1.2em;
 		perspective: 100vw;
 	}
 </style>
