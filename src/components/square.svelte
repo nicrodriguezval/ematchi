@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { getTwemojiUrl } from "$lib/utils";
+
   export let emoji: string;
   export let selected: boolean;
   export let found: boolean;
@@ -7,7 +9,7 @@
 <div class="square" class:flipped={selected}>
   <button on:click />
   {#if !found}
-    <span>{ emoji }</span>
+    <img alt={emoji} src={getTwemojiUrl(emoji)} />
   {/if}
 </div>
 
@@ -18,23 +20,21 @@
     place-content: center;
     border-radius: 1em;
     overflow: hidden;
+    background-color: var(--gray-color);
 
     & > button {
       position: absolute;
       inset: 0;
-      z-index: 0;
       border: none;
+      background-color: transparent;
     }
     
-    & > span {
-      font-size: 5em;
-      z-index: 1;
+    & > img {
+      width: 5em;
     }
   }
 
   .flipped {
-    & > button {
-      background-color: teal;
-    }
+    background-color: teal;
   }
 </style>
