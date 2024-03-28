@@ -48,7 +48,7 @@
 
   .flipped {
     background-color: transparent;
-    border: .5em solid teal;
+    border: .5em solid var(--primary-color);
     transform: rotateY(180deg);
   }
 </style>

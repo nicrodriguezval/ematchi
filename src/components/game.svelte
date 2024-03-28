@@ -15,7 +15,7 @@
     const emojisCopy = level.emojis.slice();
     const pairs: string[] = [];
 
-    for (let i = 0; i < level.size / 2; i++) {
+    for (let i = 0; i < size * size / 2; i++) {
       const index = Math.floor(Math.random() * emojisCopy.length);
       const [emoji] = emojisCopy.splice(index, 1);
       pairs.push(emoji);
@@ -29,15 +29,28 @@
   function onFound(e: CustomEvent) {
     found = [...found, e.detail.emoji];
 
-    if (found.length === grid.length / 2) {
-      console.log("You won!");
+    if (found.length === size * size / 2) {
+      // TODO: win the game
     }
+  }
+
+  function onEnd() {
+    // TODO: end the game
+  }
+
+  function onCountdownClick() {
+      // TODO: pause/resume the game
   }
 </script>
 
 <div class="game">
 	<div class="info">
-    <Countdown duration={level.duration} remaining={level.duration} />
+    <Countdown
+      duration={level.duration}
+      remaining={level.duration}
+      on:click={onCountdownClick}
+      on:end={onEnd}
+    />
   </div>
 	<div class="grid-container">
     <Grid {grid} {found} on:found={onFound} />
