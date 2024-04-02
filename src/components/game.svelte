@@ -1,15 +1,20 @@
 <script lang="ts">
 	import Grid from "./grid.svelte";
-  import { levels, type Level } from "$lib/levels";
+  import type { Level } from "$lib/levels";
   import { shuffle } from "$lib/utils";
 	import Found from "./found.svelte";
 	import Countdown from "./countdown.svelte";
+	import { createEventDispatcher } from "svelte";
 
-  const level = levels[0];
-
-  const { size } = level;
-  let grid = createGrid(level);
+  export let level: Level;
+  
+  let { size, duration } = level;
+  let remaining = duration;
+  let grid: string[] = createGrid(level);
   let found: string[] = [];
+  let countdown: Countdown;
+
+  const dispatch = createEventDispatcher();
 
   function createGrid(level: Level) {
     const emojisCopy = level.emojis.slice();
@@ -30,30 +35,30 @@
     found = [...found, e.detail.emoji];
 
     if (found.length === size * size / 2) {
-      // TODO: win the game
+      countdown.pause();
+      dispatch('win');
     }
   }
 
   function onEnd() {
-    // TODO: end the game
-  }
-
-  function onCountdownClick() {
-      // TODO: pause/resume the game
+    countdown.pause();
+    dispatch('lose');
   }
 </script>
 
-<div class="game">
+<div class="game" style="--size: {size}">
 	<div class="info">
     <Countdown
-      duration={level.duration}
-      remaining={level.duration}
-      on:click={onCountdownClick}
+      bind:this={countdown}
+      {duration}
+      {remaining}
       on:end={onEnd}
+      on:pause
+      on:play
     />
   </div>
 	<div class="grid-container">
-    <Grid {grid} {found} on:found={onFound} />
+  <Grid {grid} {found} on:found={onFound} />
   </div>
 	<div class="info">
     <Found {found} />
